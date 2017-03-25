@@ -1,0 +1,89 @@
+﻿@model CarRental.WebApp.Areas.AdminPanel.Models.VehicleViewModel
+
+@{
+    ViewBag.Title = "Modify vehicle";
+    var btnName = Model.Id != 0 ? "Edit" : "Create";
+}
+
+<h2>Modify vehicle</h2>
+
+@using (Html.BeginForm("Modify", "Vehicle", FormMethod.Post, new { area = "AdminPanel" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @if (Model.IsSuccessModified)
+        {
+            <p style="color: green">Modification completed successfully!</p>
+        }
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ModelName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ModelName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ModelName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PricePerHour, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PricePerHour, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PricePerHour, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (Model.VehicleTypes.Any())
+        {
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VehicleTypeName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.VehicleTypeId, new SelectList(Model.VehicleTypes, "Id", "Name"))
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@btnName" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @if (btnName == "Edit")
+    {
+        @Html.ActionLink("Images", "Index", "VehicleImage", new { area = "AdminPanel", vehicleId = Model.Id, isEditMode = true }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Availabilities", "Index", "Availability", new { area = "AdminPanel", vehicleId = Model.Id, isEditMode = true }, new { @class = "btn btn-primary" })
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

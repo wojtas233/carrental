@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Admin Panel";
+}
+
+<h2>Admin Panel</h2>
+
+<p>
+    @Html.ActionLink("Vehicles", "Index", "Vehicle", new { area = "AdminPanel" }, new { @class="btn btn-primary" })
+</p>
+<p>
+    @Html.ActionLink("Locations", "Index", "Location", new { area = "AdminPanel" }, new { @class = "btn btn-primary" })
+</p>
+<p>
+    @Html.ActionLink("Vehicle types", "Index", "VehicleType", new { area = "AdminPanel" }, new { @class = "btn btn-primary" })
+</p>
+<p>
+    @Html.ActionLink("Users", "Index", "User", new { area = "AdminPanel" }, new { @class = "btn btn-primary" })
+</p>
+<p>
+    @Html.ActionLink("Equipments", "Index", "Equipment", new { area = "AdminPanel" }, new { @class = "btn btn-primary" })
+</p>

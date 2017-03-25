@@ -1,0 +1,52 @@
+﻿@model CarRental.WebApp.Areas.AdminPanel.Models.AvailabilityDetailsViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Availability</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateFrom)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullLocationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullLocationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullVehicleName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FullVehicleName)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Availability", new { area = "AdminPanel", id = Model.Id, vehicleId = Model.VehicleId, isEditMode = Model.IsEditMode })) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            @Html.ActionLink("Back to List", "Index", new { vehicleId = Model.VehicleId, isEditMode = Model.IsEditMode }, new { @class="btn btn-default" })
+        </div>
+    }
+</div>

@@ -1,0 +1,60 @@
+﻿@model CarRental.WebApp.Areas.AdminPanel.Models.AvailabilitiesViewModel
+
+@{
+    ViewBag.Title = "Availabilities";
+}
+
+<h2>Availabilities</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { vehicleId = Model.VehicleId, isEditMode = Model.IsEditMode }, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        @if (Model.Availabilities.Any())
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.Availabilities.ElementAt(0).DateFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Availabilities.ElementAt(0).DateTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Availabilities.ElementAt(0).FullLocationName)
+            </th>
+            <th></th>
+        }
+    </tr>
+
+@foreach (var item in Model.Availabilities) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullLocationName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id, isEditMode = Model.IsEditMode }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id, isEditMode = Model.IsEditMode }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id, isEditMode = Model.IsEditMode })
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    @if (Model.IsEditMode)
+    {
+        @Html.ActionLink("Back", "Edit", "Vehicle", new { area = "AdminPanel", id = Model.VehicleId }, new { @class = "btn btn-default" })
+    }
+    else
+    {
+        @Html.ActionLink("Back", "Index", "VehicleImage", new { area = "AdminPanel", vehicleId = Model.VehicleId }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Finish", "Index", "Vehicle", new { area = "AdminPanel" }, new { @class = "btn btn-success" })
+    }
+</p>

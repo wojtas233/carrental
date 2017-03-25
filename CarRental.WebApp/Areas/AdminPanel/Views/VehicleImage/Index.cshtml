@@ -1,0 +1,50 @@
+﻿@model CarRental.WebApp.Areas.AdminPanel.Models.VehicleImagesViewModel
+
+@{
+    ViewBag.Title = "Images";
+}
+
+<h2>Images</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { vehicleId = Model.VehicleId, isEditMode = Model.IsEditMode }, new { @class= "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        @if (Model.Images != null && Model.Images.Any())
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.Images.ElementAt(0).Path)
+            </th>
+            <th></th>
+        }
+    </tr>
+
+@foreach (var item in Model.Images) {
+    <tr>
+        <td>
+            @if (item.Path != null)
+            {
+                <img src="@Url.Content(item.Path)" alt="Image" id="imagePath" />
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id, isEditMode = Model.IsEditMode }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id, isEditMode = Model.IsEditMode })
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    @if (Model.IsEditMode)
+    {
+        @Html.ActionLink("Back", "Edit", "Vehicle", new { area = "AdminPanel", id = Model.VehicleId }, new { @class = "btn btn-default" })
+    }
+    else
+    {
+        @Html.ActionLink("Back", "Index", "Vehicle", new { area = "AdminPanel" }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Next", "Index", "Availability", new { area = "AdminPanel", vehicleId = Model.VehicleId }, new { @class = "btn btn-success" })
+    }
+</p>

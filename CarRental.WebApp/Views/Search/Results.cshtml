@@ -1,0 +1,73 @@
+﻿@model IEnumerable<CarRental.WebApp.Models.SearchResultViewModel>
+
+<div class="jumbotron">
+    @if (Model.Any())
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VehicleName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VehicleTypeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LocationName)
+                </th>
+                <th>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleTypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocationName)
+                    </td>
+                    <td>
+                        <img src="@Url.Content(item.ImagePath)" alt="Image" />
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Create", "Reservation", new
+                        {
+                            area = "UserPanel"
+                        }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.Hidden("AvailabilityDateFrom", item.Reservation.AvailabilityDateFrom)
+                            @Html.Hidden("AvailabilityDateTo", item.Reservation.AvailabilityDateTo)
+                            @Html.Hidden("DateFrom", item.Reservation.DateFrom)
+                            @Html.Hidden("DateTo", item.Reservation.DateTo)
+                            @Html.Hidden("LocationName", item.Reservation.LocationName)
+                            @Html.Hidden("AvailabilityId", item.Reservation.AvailabilityId)
+
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Get car" class="btn btn-default" />
+                            </div>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>Sorry. No results</p>
+        <p>You can go back to search. Click!</p>
+        <div>
+            @Html.ActionLink("Go to Search", "Index", "Home", null, new { @class = "btn btn-primary" })
+        </div>
+    }
+
+</div>
+<div>
+    @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-default" })
+</div>

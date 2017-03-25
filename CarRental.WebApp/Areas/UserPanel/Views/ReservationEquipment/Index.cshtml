@@ -1,0 +1,44 @@
+﻿@model CarRental.WebApp.Areas.UserPanel.Models.ReservationEquipmentListViewModel
+
+@{
+    ViewBag.Title = "Equipments";
+}
+
+<h2>Equipments for reservation</h2>
+
+
+    <p>
+        @Html.ActionLink("Create New", "Create", new { reservationId = Model.ReservationId }, new { @class="btn btn-primary" })
+    </p>
+@if (Model.Equipments.Any())
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipments.ElementAt(0).EquipmentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipments.ElementAt(0).EquipmentPrice)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model.Equipments) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EquipmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EquipmentPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+    </table>
+}
+<div>
+    @Html.ActionLink("Back to reservations", "Index", "Reservation", new { area = "UserPanel", reservationId = Model.ReservationId }, new { @class = "btn btn-default" })
+</div>
