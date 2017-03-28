@@ -12,6 +12,7 @@ namespace CarRental.Business.Models
         public int Id { get; set; }
         public String Name { get; set; }
         public ImageModel Image { get; set; }
+        public bool IsEnabled { get; set; }
         public HttpPostedFileBase ImageFile { get; set; }
     }
 }

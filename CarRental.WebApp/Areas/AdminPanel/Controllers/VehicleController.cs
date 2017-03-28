@@ -50,7 +50,7 @@ namespace CarRental.WebApp.Areas.AdminPanel.Controllers
         public ActionResult Create()
         {
             var model = new VehicleViewModel();
-            model.VehicleTypes = Mapper.Map<List<VehicleTypeModel>, List<VehicleTypeViewModel>>(_vehicleTypeBusiness.GetAll());
+            model.VehicleTypes = Mapper.Map<List<VehicleTypeModel>, List<VehicleTypeViewModel>>(_vehicleTypeBusiness.GetAll(true));
             return View("Modify", model);
         }
 
@@ -89,7 +89,7 @@ namespace CarRental.WebApp.Areas.AdminPanel.Controllers
                 return HttpNotFound();
             }
             var model = Mapper.Map<VehicleModel, VehicleViewModel>(dbModel);
-            model.VehicleTypes = Mapper.Map<List<VehicleTypeModel>, List<VehicleTypeViewModel>>(_vehicleTypeBusiness.GetAll());
+            model.VehicleTypes = Mapper.Map<List<VehicleTypeModel>, List<VehicleTypeViewModel>>(_vehicleTypeBusiness.GetAll(true));
             model.IsSuccessModified = isSuccessModified;
 
             return View("Modify", model);

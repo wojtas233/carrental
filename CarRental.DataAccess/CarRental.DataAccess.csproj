@@ -143,6 +143,10 @@
     <Compile Include="Migrations\201703211857552_Add_user_to_reservation_table.Designer.cs">
       <DependentUpon>201703211857552_Add_user_to_reservation_table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703281706225_Add_IsEnabled_property_to_VehicleType.cs" />
+    <Compile Include="Migrations\201703281706225_Add_IsEnabled_property_to_VehicleType.Designer.cs">
+      <DependentUpon>201703281706225_Add_IsEnabled_property_to_VehicleType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -183,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703211857552_Add_user_to_reservation_table.resx">
       <DependentUpon>201703211857552_Add_user_to_reservation_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703281706225_Add_IsEnabled_property_to_VehicleType.resx">
+      <DependentUpon>201703281706225_Add_IsEnabled_property_to_VehicleType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

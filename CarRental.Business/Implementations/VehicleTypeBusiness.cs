@@ -19,21 +19,45 @@ namespace CarRental.Business.Implementations
             _dbContext = db;
         }
 
-        public List<VehicleTypeModel> GetAll()
+        public List<VehicleTypeModel> GetAll(bool showAll)
         {
-            var model = (from vehicleType in _dbContext.VehicleTypes
-                           join image in _dbContext.Images
-                            on vehicleType.Image.Id equals image.Id
-                           select new VehicleTypeModel
-                           {
-                               Id = vehicleType.Id,
-                               Name = vehicleType.Name,
-                               Image = new ImageModel
-                               {
-                                   Id = image.Id,
-                                   Path = image.Path
-                               }
-                           }).ToList();
+            var model = new List<VehicleTypeModel>();
+            if (showAll)
+            {
+                model = (from vehicleType in _dbContext.VehicleTypes
+                             join image in _dbContext.Images
+                              on vehicleType.Image.Id equals image.Id
+                             select new VehicleTypeModel
+                             {
+                                 Id = vehicleType.Id,
+                                 Name = vehicleType.Name,
+                                 IsEnabled = vehicleType.IsEnabled,
+                                 Image = new ImageModel
+                                 {
+                                     Id = image.Id,
+                                     Path = image.Path
+                                 }
+                             }).ToList();
+            }
+            else
+            {
+                model = (from vehicleType in _dbContext.VehicleTypes
+                             join image in _dbContext.Images
+                              on vehicleType.Image.Id equals image.Id
+                             where vehicleType.IsEnabled
+                             select new VehicleTypeModel
+                             {
+                                 Id = vehicleType.Id,
+                                 Name = vehicleType.Name,
+                                 IsEnabled = vehicleType.IsEnabled,
+                                 Image = new ImageModel
+                                 {
+                                     Id = image.Id,
+                                     Path = image.Path
+                                 }
+                             }).ToList();
+            }
+            
             return model;
         }
 
@@ -66,7 +90,11 @@ namespace CarRental.Business.Implementations
                 {
                     dbModel.Name = model.Name;
                 }
-                if(!string.IsNullOrEmpty(model.ImageFile.FileName) && dbModel.Image != null && model.Image != null)
+                if (dbModel.IsEnabled != model.IsEnabled)
+                {
+                    dbModel.IsEnabled = model.IsEnabled;
+                }
+                if (!string.IsNullOrEmpty(model.ImageFile.FileName) && dbModel.Image != null && model.Image != null)
                 {
                     var generatedPath = ImageHelper.SaveToFolder(model.ImageFile, EnitityTypesEnum.VehicleType, model.Id.ToString(), model.Name);
                     if(dbModel.Image.Path != generatedPath)
@@ -86,21 +114,6 @@ namespace CarRental.Business.Implementations
             }
         }
 
-        public void Delete(int id)
-        {
-            var dbModel = _dbContext.VehicleTypes.Include("Image").SingleOrDefault(x => x.Id == id);
-
-            var image = _dbContext.Images.SingleOrDefault(x => x.Id == dbModel.Image.Id);
-            if(image != null)
-            {
-                ImageHelper.DeleteFromFolder(image.Path);
-                _dbContext.Images.Remove(image);
-            }
-
-            _dbContext.VehicleTypes.Remove(dbModel);
-            _dbContext.SaveChanges();
-        }
-
         public VehicleTypeModel GetVehicleType(int? id)
         {
             var dbModel = (from vehicleType in _dbContext.VehicleTypes
@@ -111,6 +124,7 @@ namespace CarRental.Business.Implementations
                            {
                                Id = vehicleType.Id,
                                Name = vehicleType.Name,
+                               IsEnabled = vehicleType.IsEnabled,
                                Image = new ImageModel
                                {
                                    Id = image.Id,

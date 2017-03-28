@@ -11,5 +11,6 @@ namespace CarRental.DataAccess.Entities
         public int Id { get; set; }
         public String Name { get; set; }
         public Image Image { get; set; }
+        public bool IsEnabled { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace CarRental.WebApp.Areas.AdminPanel.Models
     {
         public int Id { get; set; }
         public String Name { get; set; }
+        public bool IsEnabled { get; set; }
         public ImageViewModel Image { get; set; }
     }
 }

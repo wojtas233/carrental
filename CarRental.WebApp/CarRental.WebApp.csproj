@@ -261,7 +261,6 @@
     <Content Include="Areas\AdminPanel\Views\Location\Details.cshtml" />
     <Content Include="Areas\AdminPanel\Views\Location\Index.cshtml" />
     <Content Include="Areas\AdminPanel\Views\VehicleType\Modify.cshtml" />
-    <Content Include="Areas\AdminPanel\Views\VehicleType\Delete.cshtml" />
     <Content Include="Areas\AdminPanel\Views\VehicleType\Details.cshtml" />
     <Content Include="Areas\AdminPanel\Views\VehicleType\Index.cshtml" />
     <Content Include="Areas\AdminPanel\Views\Vehicle\Modify.cshtml" />

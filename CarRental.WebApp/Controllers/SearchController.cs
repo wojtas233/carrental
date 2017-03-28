@@ -29,7 +29,7 @@ namespace CarRental.WebApp.Controllers
             var locations = _locationBusiness.GetNames();
             var locationViewModels = Mapper.Map<List<LocationSearchModel>, List<LocationViewModel>>(locations);
 
-            var vehicleTypes = _vehicleTypeBusiness.GetAll();
+            var vehicleTypes = _vehicleTypeBusiness.GetAll(false);
             var vehicleTypeViewModels = Mapper.Map<List<VehicleTypeModel>, List<VehicleTypeViewModel>>(vehicleTypes);
 
             var model = new SearchViewModel

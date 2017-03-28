@@ -28,7 +28,7 @@ namespace CarRental.WebApp.Areas.AdminPanel.Controllers
         // GET: AdminPanel/VehicleType
         public ActionResult Index()
         {
-            var dbModel = _vehicleTypeBusiness.GetAll();
+            var dbModel = _vehicleTypeBusiness.GetAll(true);
             var model = Mapper.Map<List<VehicleTypeModel>, List<VehicleTypeViewModel>>(dbModel);
             return View(model);
         }
@@ -56,6 +56,7 @@ namespace CarRental.WebApp.Areas.AdminPanel.Controllers
             var model = new VehicleTypeViewModel();
             var image = new ImageViewModel();
             model.Image = image;
+            model.IsEnabled = true;
             return View("Modify", model);
         }
 
@@ -103,33 +104,6 @@ namespace CarRental.WebApp.Areas.AdminPanel.Controllers
             var model = Mapper.Map<VehicleTypeModel, VehicleTypeViewModel>(dbModel);
 
             return View("Modify", model);
-        }
-        
-        // GET: AdminPanel/VehicleType/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var dbModel = _vehicleTypeBusiness.GetVehicleType(id);
-            if (dbModel == null)
-            {
-                return HttpNotFound();
-            }
-
-            var model = Mapper.Map<VehicleTypeModel, VehicleTypeViewModel>(dbModel);
-
-            return View(model);
-        }
-
-        // POST: AdminPanel/VehicleType/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            _vehicleTypeBusiness.Delete(id);
-            return RedirectToAction("Index", "VehicleType", new { area = "AdminPanel" });
         }
 
         protected override void Dispose(bool disposing)

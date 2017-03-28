@@ -96,6 +96,15 @@ namespace CarRental.Business.Implementations
 
         public void Delete(int id)
         {
+            var equipments = (from reserv in _dbContext.Reservations
+                              join reservEq in _dbContext.ReservationEquipments
+                                on reserv.Id equals reservEq.Reservation.Id
+                              select reservEq).ToList();
+            if(equipments != null && equipments.Any())
+            {
+                _dbContext.ReservationEquipments.RemoveRange(equipments);
+            }
+
             var dbModel = _dbContext.Reservations.SingleOrDefault(x => x.Id == id);
 
             _dbContext.Reservations.Remove(dbModel);

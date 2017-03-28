@@ -9,10 +9,9 @@ namespace CarRental.Business.Interfaces
 {
     public interface IVehicleTypeBusiness
     {
-        List<VehicleTypeModel> GetAll();
+        List<VehicleTypeModel> GetAll(bool showAll);
         void Add(VehicleTypeModel model);
         void Edit(VehicleTypeModel model);
-        void Delete(int id);
         VehicleTypeModel GetVehicleType(int? id);
     }
 }

@@ -26,6 +26,13 @@
             </div>
         </div>
         <div class="form-group">
+            @Html.LabelFor(model => model.IsEnabled, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsEnabled)
+                @Html.ValidationMessageFor(model => model.IsEnabled, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @if (Model.Image != null && Model.Image.Path != null)
