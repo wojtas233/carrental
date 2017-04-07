@@ -10,11 +10,11 @@ namespace CarRental.WebApp.Models
     {
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Date from")]
+        [Display(Name = "Pick up")]
         public DateTime DateFrom { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Date to")]
+        [Display(Name = "Drop off")]
         public DateTime DateTo { get; set; }
         [Display(Name = "Type")]
         public int VehicleTypeId { get; set; }

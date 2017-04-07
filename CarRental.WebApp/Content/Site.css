@@ -30,10 +30,66 @@ textarea {
     max-width: 400px;
 }
 
-.backgroundGrey {
-    background-color: gainsboro;
+.backgroundWhite {
+    background-color: white;
 }
 
 .btn.btn-custom-primary {
     background-color: hsla(11, 33%, 22%, 0.09);
 }
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-header > a:hover {
+    color: black;
+}
+
+.btn-square {
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+    float: left;
+    margin-right:10px;
+    text-align: center;
+    color: white;
+}
+
+.btn-search {
+    float: right;
+}
+
+.vehicle-type {
+    background-color: rgb(69, 85, 128);
+}
+
+.vehicle-type-image {
+    margin-top: 37px;
+    height: 42px;
+}
+
+.location {
+    background-color: rgb(44, 64, 120);
+    padding-top: 18px;
+}
+
+.location.active {
+    box-shadow: inset 0 0 12px 3px #000000;
+}
+
+.font-size-12 {
+    font-size: 12px;
+}
+
+.vehicle-type-name {
+    font-size: 17px;
+    padding-top: 10px;
+}
+
+.form-label {
+        font-size: 16px;
+}
+
+.category-custom-button.active {
+/* background-color: #C3A3A3 !important;  */
+    box-shadow: inset 0 0 12px 3px #000000;
+}
+
+

@@ -30,7 +30,17 @@ namespace CarRental.WebApp.Controllers
             var locationViewModels = Mapper.Map<List<LocationSearchModel>, List<LocationViewModel>>(locations);
 
             var vehicleTypes = _vehicleTypeBusiness.GetAll(false);
-            var vehicleTypeViewModels = Mapper.Map<List<VehicleTypeModel>, List<VehicleTypeViewModel>>(vehicleTypes);
+            var vehicleTypeViewModels = new List<VehicleTypeViewModel>();
+            foreach (var item in vehicleTypes)
+            {
+                var viewModelItem = new VehicleTypeViewModel
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Path = item.Image.Path
+                };
+                vehicleTypeViewModels.Add(viewModelItem);
+            }
 
             var model = new SearchViewModel
             {

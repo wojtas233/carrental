@@ -3,28 +3,32 @@
 @{ 
     ViewBag.Title = "Home Page";
 }
-<div class="jumbotron">
-    <h1>Check our cars!</h1>
+
+<div class="row bg-top">
+    <img src="/Uploads/Images/Main/main-banner.jpg" class="img-responsive banner-main rest_height img-hidden" />
+</div>
+<div class="jumbotron search-box">
     <div id="search">
         @using (Html.BeginForm("Search", "Search", FormMethod.Post, new { area = "UserPanel" }))
         {
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
-                <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.VehicleTypeId)
+                @Html.HiddenFor(model => model.LocationId)
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.DateFrom, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(model => model.DateFrom, htmlAttributes: new { @class = "control-label col-md-3 form-label" })
+                    <div class="col-md-8">
                         @Html.EditorFor(model => model.DateFrom, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.DateFrom, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.DateTo, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(model => model.DateTo, htmlAttributes: new { @class = "control-label col-md-3 form-label" })
+                    <div class="col-md-8">
                         @Html.EditorFor(model => model.DateTo, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.DateTo, "", new { @class = "text-danger" })
                     </div>
@@ -33,29 +37,92 @@
                 @if (Model.VehicleTypes.Any())
                 {
                     <div class="form-group">
-                        @Html.LabelFor(model => model.VehicleTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.VehicleTypeId, new SelectList(Model.VehicleTypes, "Id", "Name"))
-                        </div>
+                        @foreach (var item in Model.VehicleTypes)
+                        {
+                            <div class="btn-square vehicle-type category-custom-button" onclick="selectCategory(this, @item.Id)">
+                                <div class="col-md-12 vehicle-type-image">
+                                    <img src="@item.Path" class="img-responsive banner-main rest_height img-hidden" />
+                                </div>
+                                <div class="col-md-12 vehicle-type-name">@item.Name</div>
+                            </div>
+                        }
                     </div>
                 }
 
                 @if (Model.Locations.Any())
                 {
                     <div class="form-group">
-                        @Html.LabelFor(model => model.LocationId, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.LocationId, new SelectList(Model.Locations, "Id", "FullName"))
-                        </div>
+                        @foreach (var item in Model.Locations)
+                        {
+                            <div class="btn-square location" onclick="selectLocation(this, @item.Id)">
+                                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                                <div class="col-md-12 font-size-12">@item.FullName</div>
+                            </div>
+                        }
                     </div>
                 }
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Search" class="btn btn-success" />
+                        <input type="submit" value="Search" class="btn btn-success btn-lg btn-search" />
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
+@Scripts.Render("~/bundles/jquery")
+<style>
+    .bg-top{
+        position: absolute;
+        left: 0;
+        z-index: -6;
+    }
+    .search-box {
+        margin-top: 210px;
+        width: 800px;
+        background-color: rgba(33, 103, 152, 0.91);
+    }
+</style>
+
+<script>
+    function selectLocation(elem, id) {
+        clearSelectedLocations();
+
+        if (elem.className.indexOf('active') == -1) {
+            elem.className += " active";
+            $("#LocationId").val(id);
+        }
+    }
+
+    function clearSelectedLocations() {
+        var categories = document.getElementsByClassName("location");
+        for (var i = 0; i < categories.length; i++) {
+            categories[i].className = categories[i].className.replace(/(?:^|\s)active(?!\S)/, '');
+        }
+    }
+
+    function selectCategory(elem, id) {
+        clearSelectedCategories();
+
+        if (elem.className.indexOf('active') == -1) {
+            elem.className += " active";
+            $("#VehicleTypeId").val(id);
+        }
+    }
+
+    function clearSelectedCategories() {
+        var categories = document.getElementsByClassName("category-custom-button");
+        for (var i = 0; i < categories.length; i++) {
+            categories[i].className = categories[i].className.replace(/(?:^|\s)active(?!\S)/, '');
+        }
+    }
+
+    if (document.readyState) {
+        function setDefault() {
+            $(".btn-square.location")[0].onclick();
+            $(".btn-square.category-custom-button")[0].onclick();
+        }
+        setDefault();
+    }
+</script>
