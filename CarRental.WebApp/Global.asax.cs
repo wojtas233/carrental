@@ -46,6 +46,7 @@ namespace CarRental.WebApp
             builder.RegisterType<SearchBusiness>().As<ISearchBusiness>().SingleInstance();
             builder.RegisterType<EquipmentBusiness>().As<IEquipmentBusiness>().SingleInstance();
             builder.RegisterType<ReservationEquipmentBusiness>().As<IReservationEquipmentBusiness>().SingleInstance();
+            builder.RegisterType<DefaultValuesBusiness>().As<IDefaultValuesBusiness>().SingleInstance();
 
             // OPTIONAL: Register model binders that require DI.
             builder.RegisterModelBinders(Assembly.GetExecutingAssembly());

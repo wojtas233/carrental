@@ -279,6 +279,7 @@
     <Content Include="Areas\UserPanel\Views\ReservationEquipment\Modify.cshtml" />
     <Content Include="Areas\UserPanel\Views\User\Index.cshtml" />
     <Content Include="Areas\UserPanel\Views\ReservationEquipment\Delete.cshtml" />
+    <None Include="Properties\PublishProfiles\carrental.hostingasp.pl - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -291,7 +292,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

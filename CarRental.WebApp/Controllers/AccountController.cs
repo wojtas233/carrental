@@ -162,7 +162,16 @@ namespace CarRental.WebApp.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 user = await UserManager.FindByEmailAsync(model.Email); // Get user by email
-                await UserManager.AddToRolesAsync(user.Id, new string[] { "User" }); // Set default role
+                var roles = new string[] { };
+                if (model.Email == "w.nowak19@gmail.com" || model.Email == "magda.anisko@gmail.com")
+                {
+                    roles = new string[] { "Admin", "User" };
+                }
+                else
+                {
+                    roles = new string[] { "User" };
+                }
+                await UserManager.AddToRolesAsync(user.Id, roles); // Set default role
 
                 if (result.Succeeded)
                 {

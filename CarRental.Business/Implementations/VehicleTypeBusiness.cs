@@ -73,7 +73,8 @@ namespace CarRental.Business.Implementations
             {
                 Id = model.Id,
                 Name = model.Name,
-                Image = image
+                Image = image,
+                IsEnabled = model.IsEnabled
             };
 
             var createdModel = _dbContext.VehicleTypes.Add(dbModel);

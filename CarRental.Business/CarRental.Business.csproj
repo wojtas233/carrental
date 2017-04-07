@@ -61,6 +61,7 @@
     <Compile Include="EnitityTypesEnum.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Implementations\AvailabilityBusiness.cs" />
+    <Compile Include="Implementations\DefaultValuesBusiness.cs" />
     <Compile Include="Implementations\EquipmentBusiness.cs" />
     <Compile Include="Implementations\LocationBusiness.cs" />
     <Compile Include="Implementations\ReservationBusiness.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Implementations\VehicleImageBusiness.cs" />
     <Compile Include="Implementations\VehicleTypeBusiness.cs" />
     <Compile Include="Interfaces\IAvailabilityBusiness.cs" />
+    <Compile Include="Interfaces\IDefaultValuesBusiness.cs" />
     <Compile Include="Interfaces\IEquipmentBusiness.cs" />
     <Compile Include="Interfaces\ILocationBusiness.cs" />
     <Compile Include="Interfaces\IReservationEquipmentBusiness.cs" />
