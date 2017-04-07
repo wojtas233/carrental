@@ -50,6 +50,7 @@ textarea {
     margin-right:10px;
     text-align: center;
     color: white;
+    cursor: pointer;
 }
 
 .btn-search {
